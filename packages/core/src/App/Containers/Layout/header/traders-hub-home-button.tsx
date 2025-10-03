@@ -43,7 +43,7 @@ const TradersHubHomeButton = observer(() => {
             
             <Text className='traders-hub-header__tradershub--text'>
                 <a href='https://smarttraderstool.com'>
-                    <Localize i18n_default_text="MERRICK" />
+                    <Localize i18n_default_text="LECTURE" />
                 </a>
             </Text>
         </div>

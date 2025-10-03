@@ -1,360 +1,229 @@
-.geo-loading {
-    position: relative;
-    display: flex;
-    align-items: center;
+/** @define barspinner */
+.barspinner {
+    margin: auto;
+    width: 6rem;
+    height: 2rem;
+    white-space: nowrap;
+
+    &__rect {
+        margin: 0.4rem;
+        border-radius: 20px;
+        height: 60%;
+        width: 0.6rem;
+        display: inline-block;
+        @include createBarspinnerAnimation(5, 1.2s, 0.1);
+    }
+    &--dark .barspinner__rect {
+        background-color: var(--brand-secondary);
+    }
+}
+
+@keyframes sk-stretchdelay {
+    0%,
+    40%,
+    100% {
+        transform: scaleY(1);
+    }
+    20% {
+        transform: scaleY(2);
+    }
+}
+
+/** @define initial-loader */
+.initial-loader {
+    width: 100%;
+    height: 100%;
     justify-content: center;
-    min-height: 200px;
-    background: linear-gradient(135deg, #1e2a3a 0%, #2d3b4d 50%, #1a2432 100%);
-    overflow: hidden;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    background: transparent;
 
     &--fullscreen {
-        position: fixed;
-        top: 0;
-        left: 0;
         width: 100vw;
         height: 100vh;
-        z-index: 9999;
-    }
 
-    &--complete {
-        opacity: 0;
-        transform: scale(0.95);
-        transition: all 0.5s ease-out;
-        pointer-events: none;
-    }
-
-    &--slow {
-        .geo-loading__spinner {
-            animation-duration: 4s !important;
+        @include desktop {
+            height: calc(100vh - #{$HEADER_HEIGHT} - #{$FOOTER_HEIGHT});
+        }
+        @include mobile {
+            height: calc(100vh - #{$MOBILE_HEADER_HEIGHT});
         }
     }
+    &__barspinner {
+        margin: 5rem auto;
 
-    // Canvas background
-    &__canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0.4;
+        &--rect {
+            background-color: var(--brand-secondary);
+        }
     }
+}
 
-    // Main container
-    &__container {
-        position: relative;
+.loading-dtrader-v2 {
+    &__trade,
+    &__positions,
+    &__contract-details {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-        padding: 2.5rem;
-        background: rgba(255, 255, 255, 0.08);
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(20px);
-        box-shadow: 
-            0 20px 40px rgba(0, 0, 0, 0.3),
-            0 0 0 1px rgba(255, 255, 255, 0.08),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        z-index: 2;
-        min-width: 320px;
+        height: 100%;
     }
-
-    // Modular grid progress indicator
-    &__modular-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 0.4rem;
-        width: 200px;
-        height: 200px;
-    }
-
-    &__grid-cell {
+    &__trade {
+        background-color: var(--semantic-color-slate-solid-surface-frame-mid);
+        padding: 0 var(--core-spacing-400);
+        gap: var(--semantic-spacing-general-sm);
         position: relative;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
-        overflow: hidden;
-        transition: all 0.3s ease;
+        overflow-x: hidden;
 
-        &:hover {
-            transform: scale(1.05);
+        .skeleton-box,
+        .skeleton-box__trade-types,
+        .skeleton-box__trade-params,
+        .skeleton-box__chart {
+            display: flex;
+            flex-direction: column;
+            border-radius: var(--semantic-borderRadius-md);
+            background-color: var(--component-modal-bg);
+
+            &__trade-types {
+                position: relative;
+                inset-inline-start: calc(-1 * var(--semantic-spacing-general-sm));
+                width: 100vw;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                border-radius: unset;
+                padding: var(--semantic-spacing-general-sm) var(--semantic-spacing-general-md);
+                gap: var(--semantic-spacing-general-sm);
+
+                .skeleton {
+                    flex-shrink: 0;
+                }
+            }
+            &__market {
+                padding: 0 var(--semantic-spacing-general-sm);
+            }
+            &__trade-params {
+                padding: var(--semantic-spacing-general-md);
+                gap: var(--semantic-spacing-general-md);
+
+                &-row {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                &-column {
+                    display: flex;
+                    flex-direction: column;
+                    gap: var(--semantic-spacing-general-sm);
+                }
+            }
+            &__chart {
+                min-height: 400px;
+                padding: var(--semantic-spacing-general-sm);
+            }
         }
     }
-
-    &__cell-fill {
-        position: absolute;
-        bottom: 0;
-        left: 0;
+    &__positions {
         width: 100%;
-        height: var(--cell-progress, 0%);
-        background: linear-gradient(to top, #4a90e2, #41b883, #e55934);
-        transition: height 0.3s ease;
-        border-radius: 2px;
-    }
+        background-color: var(--semantic-color-slate-solid-surface-frame-mid);
 
-    // Progress display area
-    &__progress-display {
-        position: relative;
+        .skeleton-box {
+            &__filters,
+            &__total-pnl-or-date {
+                display: flex;
+                gap: var(--semantic-spacing-gap-md);
+                margin: var(--semantic-spacing-gap-md) 0;
+                padding: 0 var(--semantic-spacing-gap-md);
+            }
+            &__tabs {
+                display: flex;
+                background-color: var(--component-modal-bg);
+                width: 100%;
+                justify-content: space-around;
+                padding: 1.3rem 0;
+            }
+            &__total-pnl-or-date {
+                justify-content: space-between;
+            }
+            &__contract-cards {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: var(--semantic-spacing-gap-md);
+                padding: 0 var(--semantic-spacing-gap-md);
+            }
+        }
+    }
+    &__contract-details {
+        background-color: var(--semantic-color-slate-solid-surface-frame-mid);
+        padding: var(--core-spacing-400);
+        gap: var(--semantic-spacing-general-sm);
+
+        .skeleton-box,
+        .skeleton-box__chart,
+        .skeleton-box__details {
+            display: flex;
+            flex-direction: column;
+            border-radius: var(--semantic-borderRadius-md);
+            background-color: var(--component-modal-bg);
+
+            &__chart {
+                min-height: 360px;
+                padding: var(--semantic-spacing-general-sm);
+            }
+            &__details {
+                padding: var(--semantic-spacing-general-md);
+                gap: var(--semantic-spacing-general-md);
+
+                &-row {
+                    display: flex;
+                    justify-content: space-between;
+                    padding-top: var(--semantic-spacing-general-sm);
+
+                    &:first-child {
+                        padding-top: unset;
+                    }
+                    &:not(:last-child) {
+                        border-bottom: 1px solid var(--semantic-color-monochrome-border-normal-mid);
+                        padding-bottom: var(--semantic-spacing-general-sm);
+                    }
+                }
+                &-column {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    gap: var(--semantic-spacing-general-2xs);
+                }
+            }
+        }
+    }
+    &__contract-card {
+        width: 100%;
+        height: 10.4rem;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
+        justify-content: space-between;
+        gap: var(--semantic-spacing-gap-md);
+        flex-shrink: 0;
+        padding: var(--semantic-spacing-general-md);
+        border-radius: var(--semantic-borderRadius-md);
+        background-color: var(--component-modal-bg);
 
-    &__percentage {
-        display: flex;
-        align-items: baseline;
-        gap: 0.2rem;
-        font-weight: 700;
-    }
-
-    &__percentage-number {
-        font-size: 2.5rem;
-        line-height: 1;
-        background: linear-gradient(45deg, #4a90e2, #41b883);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 20px rgba(74, 144, 226, 0.3);
-    }
-
-    &__percentage-symbol {
-        font-size: 1.4rem;
-        opacity: 0.8;
-        color: #4a90e2;
-    }
-
-    // Spinner
-    &__spinner {
-        width: 80px;
-        height: 80px;
-        animation: spin 3s infinite linear;
-    }
-
-    &__spinner-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-    }
-
-    &__spinner-element {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border: 3px solid;
-        border-radius: 8px;
-        animation: pulse 2s infinite ease-in-out;
-
-        &--1 {
-            width: 60px;
-            height: 60px;
-            border-color: #4a90e2;
-            animation-delay: 0s;
+        .details,
+        .status-and-profit {
+            display: flex;
+            gap: var(--core-spacing-400);
+            align-items: center;
         }
-
-        &--2 {
-            width: 40px;
-            height: 40px;
-            border-color: #41b883;
-            animation-delay: 0.3s;
+        .status-and-profit {
+            justify-content: space-between;
         }
-
-        &--3 {
-            width: 20px;
-            height: 20px;
-            border-color: #e55934;
-            animation-delay: 0.6s;
+        .title {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            gap: var(--semantic-spacing-general-xs);
         }
-    }
-
-    // Status text
-    &__status {
-        min-height: 1.5rem;
-        display: flex;
-        align-items: center;
-    }
-
-    &__status-text {
-        font-size: 1rem;
-        font-weight: 500;
-        color: rgba(255, 255, 255, 0.9);
-        font-family: 'Inter', sans-serif;
-    }
-
-    &__cursor {
-        display: inline-block;
-        margin-left: 2px;
-        animation: cursorBlink 1s infinite;
-        color: #4a90e2;
-
-        &.typing {
-            animation: none;
+        .stake {
+            align-self: flex-end;
         }
-
-        &.blinking {
-            animation: cursorBlink 1s infinite;
-        }
-    }
-
-    // Progress bar
-    &__progress-bar {
-        width: 200px;
-        height: 6px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 3px;
-        overflow: hidden;
-    }
-
-    &__progress-track {
-        height: 100%;
-        background: linear-gradient(90deg, #4a90e2, #41b883, #965ed2);
-        border-radius: 3px;
-        transition: width 0.3s ease;
-        box-shadow: 0 0 10px rgba(74, 144, 226, 0.4);
-    }
-
-    // Floating elements
-    &__floating-elements {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
-    }
-
-    &__floating-element {
-        position: absolute;
-        font-size: 1.2rem;
-        color: rgba(255, 255, 255, 0.15);
-        animation: float 12s infinite ease-in-out;
-
-        @for $i from 1 through 8 {
-            &--#{$i} {
-                top: random(100) * 1%;
-                left: random(100) * 1%;
-                animation-delay: #{$i * 1.5}s;
-                animation-duration: #{10 + random(8)}s;
-                color: rgba(nth([#4a90e2, #41b883, #e55934, #965ed2], random(4)), 0.2);
-            }
-        }
-    }
-}
-
-// Keyframe Animations
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 0.7;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.1);
-    }
-}
-
-@keyframes cursorBlink {
-    0%, 50% {
-        opacity: 1;
-    }
-    51%, 100% {
-        opacity: 0;
-    }
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translate(0, 0) rotate(0deg) scale(1);
-    }
-    25% {
-        transform: translate(30px, -30px) rotate(90deg) scale(1.1);
-    }
-    50% {
-        transform: translate(0, -60px) rotate(180deg) scale(1);
-    }
-    75% {
-        transform: translate(-30px, -30px) rotate(270deg) scale(0.9);
-    }
-}
-
-// Responsive design
-@media (max-width: 768px) {
-    .geo-loading {
-        &__container {
-            padding: 2rem;
-            gap: 1.5rem;
-            min-width: 280px;
-        }
-
-        &__modular-grid {
-            width: 160px;
-            height: 160px;
-            gap: 0.3rem;
-        }
-
-        &__percentage-number {
-            font-size: 2rem;
-        }
-
-        &__spinner {
-            width: 60px;
-            height: 60px;
-        }
-
-        &__spinner-element {
-            &--1 {
-                width: 45px;
-                height: 45px;
-            }
-            &--2 {
-                width: 30px;
-                height: 30px;
-            }
-            &--3 {
-                width: 15px;
-                height: 15px;
-            }
-        }
-
-        &__progress-bar {
-            width: 180px;
-        }
-    }
-}
-
-// Theme variations
-.theme--dark .geo-loading {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
-}
-
-.theme--light .geo-loading {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
-
-    &__container {
-        background: rgba(255, 255, 255, 0.9);
-        border-color: rgba(0, 0, 0, 0.1);
-    }
-
-    &__status-text {
-        color: rgba(0, 0, 0, 0.8);
-    }
-
-    &__grid-cell {
-        background: rgba(0, 0, 0, 0.1);
-    }
-
-    &__progress-bar {
-        background: rgba(0, 0, 0, 0.1);
     }
 }

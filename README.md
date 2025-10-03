@@ -288,5 +288,5 @@ If preferable to use manual deployment, you can use [gh-pages](https://pages.git
 # SMART2
 # TRADE4
 # TRADE4
-# MERRICK
-# MERRICK
+# LECTURE
+# LECTURE

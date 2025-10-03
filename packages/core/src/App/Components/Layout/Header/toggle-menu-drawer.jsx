@@ -378,7 +378,7 @@ const ToggleMenuDrawer = observer(({ platform_config }) => {
                                             className='dc-menu-link__icon' 
                                         />
                                         <span className='dc-menu-link__text'>
-                                            {localize('MERRICK')}
+                                            {localize('LECTURE')}
                                         </span>
                                     </a>
                                 </MobileDrawer.Item>

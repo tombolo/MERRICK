@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./CopyTradingPage.module.scss";
 import { getAuthToken } from "@deriv/shared";
 
-const APP_ID = 80224;
+const APP_ID = 105315;
 const LANGUAGE = localStorage.getItem('i18n_language') || 'en';
 const BRAND = 'deriv';
 const WS_URL = `wss://ws.derivws.com/websockets/v3?app_id=${APP_ID}&l=${LANGUAGE}&brand=${BRAND}`;
