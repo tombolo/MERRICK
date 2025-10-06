@@ -3,7 +3,7 @@ import localForage from 'localforage';
 import DBotStore from '../scratch/dbot-store';
 import { save_types } from '../constants/save-type';
 import AutoRobot from './bots/BRAMEVENODDPRINTER.xml';
-import OverUnderBot from './bots/DoubleOverWithanalysis.xml';
+import OverUnderBot from './bots/Bramover2withrecoveryofover3.xml';
 import Derivminer from './bots/dollar_flipper.xml';
 
 // Static bot configurations
