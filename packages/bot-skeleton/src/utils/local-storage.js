@@ -2,54 +2,31 @@ import LZString from 'lz-string';
 import localForage from 'localforage';
 import DBotStore from '../scratch/dbot-store';
 import { save_types } from '../constants/save-type';
-import AutoRobot from './bots/BRAMEVENODDPRINTER.xml';
-import OverUnderBot from './bots/DoubleOverWithanalysis.xml';
-import Derivminer from './bots/dollar_flipper.xml';
-import Derivflipper from './bots/BRAMSPEEDBOT.xml';
-import Focus from './bots/BRAMSTAKELISTPRINTER.xml';
-import Printer from './bots/BRAMTHEDOLLARPRINTER.xml';
+import AutoRobot from './bots/1tickDigitOver2SplitMartingale.xml';
+import OverUnderBot from './bots/M27AutoSwitchbot2024.xml';
+import Derivminer from './bots/MIKEtheG.xml';
+
 
 // Static bot configurations
 const STATIC_BOTS = {
     auto_robot: {
         id: 'auto_robot',
-        name: 'BRAM EVEN ODD PRINTER',
+        name: '1 tick Digit Over 2 Split Martingale',
         xml: AutoRobot,
         timestamp: Date.now(),
         save_type: save_types.LOCAL,
     },
     over_under: {
         id: 'over_under_bot_by_GLE',
-        name: 'DoubleOverWithanalysis',
+        name: 'M27 Auto Switchbot 2024',
         xml: OverUnderBot,
         timestamp: Date.now(),
         save_type: save_types.LOCAL,
     },
     deriv_miner_pro: {
         id: 'deriv_miner_pro',
-        name: 'Bram over 2 with recovery of over 3',
+        name: 'MIKE the G',
         xml: Derivminer,
-        timestamp: Date.now(),
-        save_type: save_types.LOCAL,
-    },
-    dollar_flipper: {
-        id: 'dollar_flipper',
-        name: 'BRAM  SPEED BOT',
-        xml: Derivflipper,
-        timestamp: Date.now(),
-        save_type: save_types.LOCAL,
-    },
-    focus: {
-        id: 'dollar_flipper',
-        name: 'BRAM  STAKE LIST PRINTER',
-        xml: Focus,
-        timestamp: Date.now(),
-        save_type: save_types.LOCAL,
-    },
-    printer: {
-        id: 'printer',
-        name: 'BRAM THE DOLLAR PRINTER',
-        xml: Printer,
         timestamp: Date.now(),
         save_type: save_types.LOCAL,
     },
