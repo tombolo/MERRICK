@@ -265,6 +265,32 @@ const GlobalLoading = () => {
                 ))}
             </motion.div>
 
+            {/* Deriv Partnership Badge */}
+            <motion.div
+                className='deriv-partnership'
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.8, duration: 0.8 }}
+            >
+                <div className='partnership-badge'>
+                    <motion.div
+                        className='badge-content'
+                        animate={{
+                            y: [0, -5, 0],
+                        }}
+                        transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            ease: 'easeInOut'
+                        }}
+                    >
+                        <span className='partnership-text'>In Partnership with</span>
+                        <span className='deriv-logo'>DERIV</span>
+                    </motion.div>
+                    <div className='badge-glow'></div>
+                </div>
+            </motion.div>
+
             {showElements && (
                 <div className='content-wrapper'>
                     {/* Trading terminal */}
@@ -309,10 +335,18 @@ const GlobalLoading = () => {
                                 <span className='prompt'>$</span> Loading trading algorithms...
                             </motion.div>
                             <motion.div
-                                className='terminal-line blinking'
+                                className='terminal-line'
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 2.9 }}
+                            >
+                                <span className='prompt'>$</span> Powered by Deriv trading infrastructure
+                            </motion.div>
+                            <motion.div
+                                className='terminal-line blinking'
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 3.6 }}
                             >
                                 <span className='prompt'>$</span> _
                             </motion.div>
@@ -492,6 +526,35 @@ const GlobalLoading = () => {
                             </motion.div>
                         ))}
                     </div>
+
+                    {/* Powered by Deriv footer */}
+                    <motion.div
+                        className='powered-by-deriv'
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 2.5, duration: 0.6 }}
+                    >
+                        <div className='powered-by-content'>
+                            <span className='powered-by-text'>Powered by</span>
+                            <motion.span
+                                className='deriv-powered-logo'
+                                animate={{
+                                    textShadow: [
+                                        '0 0 8px rgba(255, 215, 0, 0.5)',
+                                        '0 0 15px rgba(255, 215, 0, 0.8)',
+                                        '0 0 8px rgba(255, 215, 0, 0.5)'
+                                    ],
+                                }}
+                                transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                }}
+                            >
+                                DERIV
+                            </motion.span>
+                            <span className='powered-subtitle'>Advanced Trading Technology</span>
+                        </div>
+                    </motion.div>
                 </div>
             )}
 
