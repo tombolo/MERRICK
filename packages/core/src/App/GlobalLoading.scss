@@ -5,15 +5,13 @@
   justify-content: center;
   min-height: 100vh;
   padding: 1rem;
-  background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2a 50%, #0a0a1a 100%);
+  background: linear-gradient(135deg, #0c0c14 0%, #1a1a2e 50%, #0c0c1c 100%);
   color: #fff;
   overflow: hidden;
   position: relative;
   font-family: 'Inter', 'Roboto', sans-serif;
-  perspective: 1000px;
-  box-sizing: border-box;
 
-  /* Golden grid background */
+  /* Simplified grid background */
   .golden-grid {
     position: absolute;
     top: 0;
@@ -23,36 +21,19 @@
     z-index: 1;
     pointer-events: none;
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
 
     .grid-line {
-      border: 1px solid rgba(255, 215, 0, 0.1);
+      border: 1px solid rgba(100, 149, 237, 0.1);
       
-      &:nth-child(5n) {
-        border-color: rgba(255, 215, 0, 0.2);
+      &:nth-child(4n) {
+        border-color: rgba(100, 149, 237, 0.15);
       }
     }
   }
 
-  /* Trading elements */
-  .trading-elements {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-
-    .trading-element {
-      position: absolute;
-      font-size: 1.5rem;
-      text-shadow: 0 0 10px currentColor;
-      transform-style: preserve-3d;
-      opacity: 0.7;
-    }
-  }
-
-  /* Chart background */
+  /* Simplified chart background */
   .chart-background {
     position: absolute;
     top: 0;
@@ -68,27 +49,25 @@
 
     .background-candle {
       position: relative;
-      width: 6px;
       display: flex;
       justify-content: center;
 
       .candle-body {
-        width: 4px;
         position: absolute;
         border-radius: 1px;
 
         &.bullish {
-          background: rgba(0, 200, 83, 0.2);
+          background: rgba(72, 187, 120, 0.15);
         }
 
         &.bearish {
-          background: rgba(255, 69, 58, 0.2);
+          background: rgba(239, 68, 68, 0.15);
         }
       }
     }
   }
 
-  /* Deriv Partnership Badge */
+  /* Simplified Deriv Partnership */
   .deriv-partnership {
     position: absolute;
     top: 20px;
@@ -96,47 +75,28 @@
     z-index: 3;
 
     .partnership-badge {
-      position: relative;
-      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
-      border: 1px solid rgba(255, 215, 0, 0.3);
-      border-radius: 12px;
-      padding: 12px 16px;
+      background: linear-gradient(135deg, rgba(100, 149, 237, 0.1) 0%, rgba(100, 149, 237, 0.05) 100%);
+      border: 1px solid rgba(100, 149, 237, 0.3);
+      border-radius: 8px;
+      padding: 10px 14px;
       backdrop-filter: blur(10px);
-      box-shadow: 
-        0 8px 25px rgba(0, 0, 0, 0.3),
-        0 0 20px rgba(255, 215, 0, 0.2);
 
-      .badge-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
 
-        .partnership-text {
-          font-size: 0.75rem;
-          color: rgba(255, 255, 255, 0.8);
-          letter-spacing: 0.5px;
-        }
-
-        .deriv-logo {
-          font-size: 1.1rem;
-          font-weight: 800;
-          color: #FFD700;
-          text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-          letter-spacing: 1px;
-        }
+      .partnership-text {
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.8);
+        letter-spacing: 0.5px;
       }
 
-      .badge-glow {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle at center, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
-        border-radius: 12px;
-        opacity: 0;
-        animation: badgePulse 3s infinite;
+      .deriv-logo {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #6495ED;
+        letter-spacing: 1px;
       }
     }
   }
@@ -144,89 +104,38 @@
   /* Powered by Deriv Footer */
   .powered-by-deriv {
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     z-index: 2;
 
     .powered-by-content {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
-      padding: 20px;
-      background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 215, 0, 0.02) 100%);
-      border: 1px solid rgba(255, 215, 0, 0.2);
-      border-radius: 16px;
+      gap: 6px;
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(100, 149, 237, 0.08) 0%, rgba(100, 149, 237, 0.03) 100%);
+      border: 1px solid rgba(100, 149, 237, 0.2);
+      border-radius: 12px;
       backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          45deg,
-          transparent 0%,
-          rgba(255, 215, 0, 0.1) 50%,
-          transparent 100%
-        );
-        animation: poweredShine 4s infinite linear;
-        pointer-events: none;
-      }
 
       .powered-by-text {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         color: rgba(255, 255, 255, 0.7);
         letter-spacing: 0.5px;
       }
 
       .deriv-powered-logo {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #FFD700;
-        letter-spacing: 2px;
-        margin: 4px 0;
-      }
-
-      .powered-subtitle {
-        font-size: 0.8rem;
-        color: rgba(255, 255, 255, 0.6);
-        letter-spacing: 0.3px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #6495ED;
+        letter-spacing: 1.5px;
       }
     }
   }
 
-  /* Scanning line effect */
-  .scan-line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #FFD700, transparent);
-    z-index: 10;
-    pointer-events: none;
-    box-shadow: 0 0 10px #FFD700;
-  }
-
-  /* Gold overlay */
-  .gold-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, transparent 30%, rgba(255, 215, 0, 0.05) 100%);
-    z-index: 1;
-    pointer-events: none;
-  }
-
   /* Logo styling */
   .logo-container {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     z-index: 3;
     position: relative;
     display: flex;
@@ -234,8 +143,6 @@
     align-items: center;
     
     .logo-wrapper {
-      transform-style: preserve-3d;
-      perspective: 1000px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -243,88 +150,50 @@
     
     .logo-image-container {
       position: relative;
-      width: 180px;
-      height: 180px;
+      width: 140px;
+      height: 140px;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(255,215,0,0.05) 70%, transparent 100%);
+      background: radial-gradient(circle, rgba(100, 149, 237, 0.15) 0%, rgba(100, 149, 237, 0.05) 70%, transparent 100%);
       box-shadow: 
-        0 0 60px rgba(255, 215, 0, 0.3),
-        0 0 100px rgba(255, 215, 0, 0.1),
-        inset 0 0 30px rgba(255, 215, 0, 0.2);
-      padding: 20px;
+        0 0 40px rgba(100, 149, 237, 0.3),
+        0 0 80px rgba(100, 149, 237, 0.1),
+        inset 0 0 20px rgba(100, 149, 237, 0.2);
+      padding: 16px;
       
       .logo-image {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
+        filter: drop-shadow(0 0 10px rgba(100, 149, 237, 0.4));
         border-radius: 50%;
-      }
-      
-      .logo-shine {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(255, 255, 255, 0.4) 50%, transparent 60%);
-        animation: logoShine 4s infinite linear;
-        border-radius: 50%;
-        pointer-events: none;
       }
     }
 
     .logo-glow {
       position: absolute;
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%);
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(100, 149, 237, 0.3) 0%, transparent 70%);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       border-radius: 50%;
       z-index: -1;
-      filter: blur(20px);
-    }
-
-    .gold-ring {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 200px;
-      height: 200px;
-      border: 2px solid #FFD700;
-      border-radius: 50%;
-      z-index: -2;
-      box-shadow: 0 0 20px #FFD700;
-      pointer-events: none;
-    }
-    
-    .logo-particle {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background: #FFD700;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #FFD700;
-      pointer-events: none;
+      filter: blur(15px);
     }
   }
 
-  /* Trading terminal */
+  /* Simplified Trading terminal */
   .trading-terminal {
-    background: rgba(15, 17, 28, 0.9);
-    border-radius: 10px;
+    background: rgba(20, 22, 35, 0.9);
+    border-radius: 8px;
     padding: 1rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    overflow: hidden;
+    border: 1px solid rgba(100, 149, 237, 0.3);
     font-family: 'Fira Code', 'Courier New', monospace;
     font-size: 12px;
     position: relative;
@@ -332,73 +201,38 @@
     width: 100%;
     max-width: 500px;
 
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        45deg,
-        transparent 0%,
-        rgba(255, 215, 0, 0.1) 50%,
-        transparent 100%
-      );
-      animation: terminalShine 3s infinite linear;
-      pointer-events: none;
-    }
-
     .terminal-header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       margin-bottom: 0.8rem;
       padding-bottom: 0.4rem;
-      border-bottom: 1px solid rgba(255, 215, 0, 0.3);
-
-      .terminal-dots {
-        display: flex;
-        margin-right: 8px;
-
-        .dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          margin-right: 5px;
-
-          &.red { background: #FF444F; }
-          &.yellow { background: #FFD700; box-shadow: 0 0 4px #FFD700; }
-          &.green { background: #00FF8C; }
-        }
-      }
+      border-bottom: 1px solid rgba(100, 149, 237, 0.3);
 
       .terminal-title {
-        color: #FFD700;
+        color: #6495ED;
         font-size: 11px;
         letter-spacing: 0.5px;
-        text-shadow: 0 0 4px rgba(255, 215, 0, 0.5);
-        flex: 1;
       }
       
       .terminal-status {
-        color: #00FF8C;
+        color: #48BB78;
         font-size: 10px;
         padding: 2px 6px;
-        background: rgba(0, 255, 140, 0.1);
+        background: rgba(72, 187, 120, 0.1);
         border-radius: 3px;
-        border: 1px solid rgba(0, 255, 140, 0.3);
+        border: 1px solid rgba(72, 187, 120, 0.3);
       }
     }
 
     .terminal-content {
       .terminal-line {
         margin-bottom: 0.4rem;
-        color: #FFFFFF;
+        color: #E2E8F0;
         
         .prompt {
-          color: #FFD700;
+          color: #6495ED;
           margin-right: 6px;
-          text-shadow: 0 0 2px #FFD700;
         }
 
         &.blinking {
@@ -414,101 +248,12 @@
   /* Main content wrapper */
   .content-wrapper {
     width: 95%;
-    max-width: 700px;
+    max-width: 600px;
     z-index: 2;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  /* Live chart */
-  .live-chart {
-    background: rgba(15, 17, 28, 0.9);
-    border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    overflow: hidden;
-    position: relative;
-    z-index: 2;
-    width: 100%;
-
-    .chart-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.8rem;
-      flex-wrap: wrap;
-      
-      .chart-title {
-        color: #FFD700;
-        font-weight: 600;
-        font-size: 0.9rem;
-      }
-      
-      .chart-price {
-        color: #FFFFFF;
-        font-weight: 700;
-        font-size: 0.9rem;
-      }
-    }
-    
-    .chart-container {
-      height: 150px;
-      position: relative;
-    }
-    
-    .candlestick-chart {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      height: 100%;
-      position: relative;
-      
-      .candlestick {
-        flex: 1;
-        max-width: 12px;
-        position: relative;
-        margin: 0 1px;
-        
-        .wick {
-          position: absolute;
-          width: 1px;
-          background: rgba(255, 255, 255, 0.7);
-          left: 50%;
-          transform: translateX(-50%);
-        }
-        
-        .body {
-          position: absolute;
-          width: 8px;
-          border-radius: 2px;
-          left: 50%;
-          transform: translateX(-50%);
-          
-          &.bullish {
-            background: #00C853;
-          }
-          
-          &.bearish {
-            background: #FF453A;
-          }
-        }
-      }
-    }
-    
-    .chart-footer {
-      margin-top: 0.5rem;
-      
-      .time-markers {
-        display: flex;
-        justify-content: space-between;
-        color: rgba(255, 255, 255, 0.6);
-        font-size: 0.7rem;
-      }
-    }
   }
 
   /* Market data grid */
@@ -521,31 +266,30 @@
     z-index: 2;
     
     .data-card {
-      background: rgba(15, 17, 28, 0.9);
-      border-radius: 10px;
+      background: rgba(20, 22, 35, 0.9);
+      border-radius: 8px;
       padding: 0.8rem;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 215, 0, 0.2);
+      border: 1px solid rgba(100, 149, 237, 0.2);
       display: flex;
       flex-direction: column;
       align-items: center;
       transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
       
       &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        border-color: rgba(255, 215, 0, 0.4);
+        border-color: rgba(100, 149, 237, 0.4);
       }
       
       .data-label {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         opacity: 0.8;
         margin-bottom: 0.4rem;
-        color: #FFD700;
+        color: #6495ED;
       }
       
       .data-value {
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 700;
         font-family: 'DIN Next', sans-serif;
         color: #FFFFFF;
@@ -553,15 +297,15 @@
       }
       
       .data-change {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         font-weight: 600;
         
         &.positive {
-          color: #00C853;
+          color: #48BB78;
         }
         
         &.negative {
-          color: #FF453A;
+          color: #EF4444;
         }
       }
     }
@@ -576,21 +320,19 @@
 
   .progress-container {
     width: 100%;
-    height: 8px;
+    height: 6px;
     background: rgba(255, 255, 255, 0.08);
-    border-radius: 4px;
+    border-radius: 3px;
     position: relative;
     overflow: hidden;
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(100, 149, 237, 0.2);
 
     .progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, #000000, #FFD700, #FFFFFF);
-      border-radius: 4px;
+      background: linear-gradient(90deg, #6495ED, #7B9FE8, #93A9E3);
+      border-radius: 3px;
       position: relative;
       width: 0;
-      box-shadow: 0 0 10px #FFD700;
       overflow: hidden;
 
       .progress-glow {
@@ -602,27 +344,10 @@
         background: linear-gradient(
           90deg, 
           rgba(255, 255, 255, 0) 0%, 
-          rgba(255, 255, 255, 0.4) 50%, 
+          rgba(255, 255, 255, 0.3) 50%, 
           rgba(255, 255, 255, 0) 100%
         );
         animation: shimmer 2s infinite;
-      }
-
-      .progress-particles {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        
-        .progress-particle {
-          position: absolute;
-          width: 3px;
-          height: 3px;
-          background: #FFD700;
-          border-radius: 50%;
-          top: 50%;
-          left: 0;
-          box-shadow: 0 0 4px #FFD700;
-        }
       }
     }
   }
@@ -635,72 +360,24 @@
     .progress-text {
       font-size: 0.8rem;
       font-weight: 600;
-      color: #FFD700;
-      text-shadow: 0 0 2px #FFD700;
+      color: #6495ED;
     }
 
     .progress-message {
       font-size: 0.8rem;
       opacity: 0.7;
-      color: #FFFFFF;
-    }
-  }
-
-  /* Trading indicators */
-  .trading-indicators {
-    display: flex;
-    justify-content: center;
-    gap: 0.8rem;
-    margin-top: 1.5rem;
-    z-index: 2;
-    flex-wrap: wrap;
-
-    .indicator {
-      width: 40px;
-      height: 40px;
-      border: 2px solid #FFD700;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 8px #FFD700;
-
-      .indicator-inner {
-        width: 32px;
-        height: 32px;
-        background: rgba(255, 215, 0, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
-        
-        span {
-          font-size: 0.7rem;
-          font-weight: 700;
-          color: #FFD700;
-        }
-      }
+      color: #CBD5E0;
     }
   }
 
   /* Status message */
   .status-message {
     margin-top: 1.5rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-align: center;
     font-weight: 500;
     z-index: 2;
-
-    span {
-      background: linear-gradient(90deg, #FFFFFF, #FFD700, #FFFFFF);
-      background-size: 300% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-      padding: 0 8px;
-      text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-    }
+    color: #CBD5E0;
   }
 }
 
@@ -710,34 +387,9 @@
   100% { transform: translateX(100%); }
 }
 
-@keyframes terminalShine {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-}
-
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes logoShine {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes badgePulse {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
-}
-
-@keyframes poweredShine {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
 // Media queries for responsiveness
@@ -759,23 +411,8 @@
         padding: 0.6rem;
         
         .data-value {
-          font-size: 1rem;
+          font-size: 0.9rem;
         }
-      }
-    }
-    
-    .live-chart {
-      padding: 0.8rem;
-      margin-bottom: 1rem;
-      
-      .chart-container {
-        height: 120px;
-      }
-      
-      .chart-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.3rem;
       }
     }
     
@@ -786,40 +423,17 @@
     }
     
     .logo-image-container {
-      width: 140px !important;
-      height: 140px !important;
-    }
-    
-    .gold-ring {
-      width: 160px !important;
-      height: 160px !important;
+      width: 120px !important;
+      height: 120px !important;
     }
     
     .logo-glow {
-      width: 200px !important;
-      height: 200px !important;
-    }
-    
-    .trading-indicators {
-      gap: 0.5rem;
-      
-      .indicator {
-        width: 35px;
-        height: 35px;
-        
-        .indicator-inner {
-          width: 28px;
-          height: 28px;
-          
-          span {
-            font-size: 0.6rem;
-          }
-        }
-      }
+      width: 150px !important;
+      height: 150px !important;
     }
     
     .status-message {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       margin-top: 1rem;
     }
     
@@ -828,12 +442,8 @@
     }
     
     .golden-grid {
-      grid-template-columns: repeat(8, 1fr);
-      grid-template-rows: repeat(8, 1fr);
-    }
-    
-    .trading-elements .trading-element {
-      font-size: 1.2rem;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(6, 1fr);
     }
     
     .deriv-partnership {
@@ -843,135 +453,12 @@
       .partnership-badge {
         padding: 8px 12px;
         
-        .badge-content {
-          .partnership-text {
-            font-size: 0.7rem;
-          }
-          
-          .deriv-logo {
-            font-size: 0.9rem;
-          }
-        }
-      }
-    }
-    
-    .powered-by-deriv {
-      .powered-by-content {
-        padding: 15px;
-        
-        .deriv-powered-logo {
-          font-size: 1.5rem;
+        .partnership-text {
+          font-size: 0.65rem;
         }
         
-        .powered-by-text {
-          font-size: 0.8rem;
-        }
-        
-        .powered-subtitle {
-          font-size: 0.7rem;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .global-loading {
-    .logo-image-container {
-      width: 120px !important;
-      height: 120px !important;
-    }
-    
-    .gold-ring {
-      width: 140px !important;
-      height: 140px !important;
-    }
-    
-    .logo-glow {
-      width: 170px !important;
-      height: 170px !important;
-    }
-    
-    .live-chart {
-      .chart-container {
-        height: 100px;
-      }
-      
-      .candlestick {
-        max-width: 8px !important;
-        margin: 0 0.5px !important;
-        
-        .body {
-          width: 6px !important;
-        }
-      }
-    }
-    
-    .market-data-grid {
-      .data-card {
-        .data-value {
-          font-size: 0.9rem;
-        }
-        
-        .data-label, .data-change {
-          font-size: 0.75rem;
-        }
-      }
-    }
-    
-    .trading-terminal {
-      font-size: 10px;
-    }
-    
-    .status-message {
-      font-size: 0.8rem;
-    }
-    
-    .deriv-partnership {
-      position: relative;
-      top: auto;
-      right: auto;
-      margin-bottom: 1rem;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      
-      .partnership-badge {
-        width: auto;
-      }
-    }
-  }
-}
-
-@media (max-width: 360px) {
-  .global-loading {
-    .logo-image-container {
-      width: 100px !important;
-      height: 100px !important;
-    }
-    
-    .market-data-grid {
-      .data-card {
-        padding: 0.5rem;
-        
-        .data-value {
+        .deriv-logo {
           font-size: 0.85rem;
-        }
-      }
-    }
-    
-    .trading-indicators {
-      .indicator {
-        width: 30px;
-        height: 30px;
-        
-        .indicator-inner {
-          width: 24px;
-          height: 24px;
-          
-          span {
-            font-size: 0.55rem;
-          }
         }
       }
     }
@@ -983,59 +470,45 @@
         .deriv-powered-logo {
           font-size: 1.3rem;
         }
+        
+        .powered-by-text {
+          font-size: 0.8rem;
+        }
       }
     }
   }
 }
 
-// Orientation specific adjustments
-@media (max-width: 768px) and (orientation: landscape) {
+@media (max-width: 480px) {
   .global-loading {
-    padding-top: 1rem;
-    
-    .content-wrapper {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
+    .logo-image-container {
+      width: 100px !important;
+      height: 100px !important;
     }
     
-    .trading-terminal,
-    .live-chart {
-      flex: 1;
-      min-width: 45%;
-      margin: 0.5rem;
+    .logo-glow {
+      width: 130px !important;
+      height: 130px !important;
     }
     
     .market-data-grid {
-      grid-template-columns: repeat(3, 1fr);
-      order: 3;
-      width: 100%;
-      margin-top: 0.5rem;
+      .data-card {
+        .data-value {
+          font-size: 0.85rem;
+        }
+        
+        .data-label, .data-change {
+          font-size: 0.7rem;
+        }
+      }
     }
     
-    .progress-section {
-      order: 4;
-      width: 100%;
+    .trading-terminal {
+      font-size: 10px;
     }
     
-    .trading-indicators {
-      order: 5;
-    }
-    
-    .powered-by-deriv {
-      order: 6;
-      width: 100%;
-    }
-    
-    .logo-container {
-      margin-bottom: 1rem;
-    }
-    
-    .deriv-partnership {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: auto;
+    .status-message {
+      font-size: 0.8rem;
     }
   }
 }
