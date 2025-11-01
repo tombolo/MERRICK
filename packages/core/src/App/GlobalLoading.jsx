@@ -9,35 +9,33 @@ import LOGO from './Logo/NILOTE.png';
 export const GlobalLoading = () => {
     const [progress, setProgress] = useState(0);
     const [isComplete, setIsComplete] = useState(false);
-    const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
-    // Theme colors
+    // Enhanced color palette - more vibrant and attractive
     const colors = {
-        primary: '#4F46E5',    // Indigo
-        secondary: '#7C3AED',  // Violet
-        background: '#0F172A', // Dark blue
-        surface: '#1E293B',    // Dark surface
+        primary: '#6366F1',    // Vibrant Indigo
+        secondary: '#8B5CF6',  // Electric Violet
+        background: 'linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%)', // Gradient background
+        surface: 'rgba(30, 41, 59, 0.8)',    // Glass morphism surface
         text: '#F8FAFC',      // Light text
-        accent: '#06B6D4',     // Cyan
-        gold: '#FFD700',       // Gold for partnership text
-        silver: '#C0C0C0'      // Silver for powered by text
+        accent: '#06D6A0',     // Emerald green
+        gold: '#FFD93D',       // Bright gold
+        silver: '#F1F5F9',     // Bright silver
+        neon: '#00F5FF',       // Neon cyan
+        gradient1: '#FF6B6B',  // Coral
+        gradient2: '#4ECDC4',  // Teal
+        gradient3: '#45B7D1'   // Sky blue
     };
 
-    // Text content with different styles
-    const loadingTexts = [
-        { text: "In partnership with", company: "DERIV", type: "partnership" },
-        { text: "Powered by", company: "DERIV", type: "powered" },
-        { text: "Make your trading journey", highlight: "easier", type: "journey" }
-    ];
+    // All texts displayed at once with enhanced styling
+    const loadingContent = {
+        partnership: { text: "In partnership with", company: "DERIV", type: "partnership" },
+        powered: { text: "Powered by", company: "DERIV", type: "powered" },
+        journey: { text: "Simplifying your", highlight: "trading journey", type: "journey" }
+    };
 
     useEffect(() => {
-        // Text rotation effect
-        const textInterval = setInterval(() => {
-            setCurrentTextIndex((prev) => (prev + 1) % loadingTexts.length);
-        }, 3000);
-
-        // Smooth progress animation with easing over 15 seconds
-        const duration = 15000;
+        // Smooth progress animation with easing over 12 seconds
+        const duration = 12000;
         const startTime = Date.now();
         let animationFrame;
         
@@ -62,17 +60,8 @@ export const GlobalLoading = () => {
         // Start the animation
         animationFrame = requestAnimationFrame(animate);
         
-        // Add some random micro-stutters for realism
-        const stutterInterval = setInterval(() => {
-            if (Math.random() > 0.7) {
-                setProgress(prev => Math.max(prev - Math.random() * 0.5, 0));
-            }
-        }, 200);
-        
         return () => {
             cancelAnimationFrame(animationFrame);
-            clearInterval(stutterInterval);
-            clearInterval(textInterval);
         };
     }, []);
 
@@ -81,85 +70,59 @@ export const GlobalLoading = () => {
         hidden: { opacity: 0 },
         visible: { 
             opacity: 1,
-            transition: { duration: 0.5 }
+            transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }
         },
         exit: { 
             opacity: 0,
-            transition: { duration: 0.5, delay: 0.5 }
+            scale: 1.05,
+            transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }
         }
     };
 
     const logoVariants = {
-        initial: { scale: 0.9, opacity: 0 },
+        initial: { scale: 0.8, opacity: 0, rotateY: -180 },
         animate: { 
             scale: 1,
             opacity: 1,
-            y: [0, -15, 0],
+            rotateY: 0,
+            y: [0, -10, 0],
             transition: { 
                 y: {
-                    duration: 2.5,
+                    duration: 3,
                     repeat: Infinity,
                     ease: 'easeInOut'
                 },
-                scale: { duration: 0.5 },
-                opacity: { duration: 0.5 }
+                rotateY: { duration: 1.5, ease: "easeOut" },
+                scale: { duration: 0.8, ease: "easeOut" },
+                opacity: { duration: 0.8 }
             }
         }
     };
 
-    const textVariants = {
-        enter: { 
-            opacity: 0, 
-            y: 20,
-            scale: 0.95
-        },
-        center: { 
-            opacity: 1, 
+    const textContainerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.3,
+                delayChildren: 0.5
+            }
+        }
+    };
+
+    const textItemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
             y: 0,
-            scale: 1,
             transition: {
-                duration: 0.6,
-                ease: [0.4, 0, 0.2, 1]
-            }
-        },
-        exit: { 
-            opacity: 0, 
-            y: -20,
-            scale: 1.05,
-            transition: {
-                duration: 0.4,
-                ease: [0.4, 0, 0.2, 1]
+                duration: 0.8,
+                ease: [0.25, 0.1, 0.25, 1]
             }
         }
     };
 
-    const companyVariants = {
-        initial: { scale: 1 },
-        animate: {
-            scale: [1, 1.05, 1],
-            transition: {
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-            }
-        }
-    };
-
-    // Calculate progress bar width with a minimum of 10% for better visibility
     const progressWidth = Math.max(10, progress);
-
-    const getTextStyle = (type) => {
-        switch (type) {
-            case 'partnership':
-                return styles.partnershipText;
-            case 'powered':
-                return styles.poweredText;
-            case 'journey':
-                return styles.journeyText;
-            default:
-                return styles.defaultText;
-        }
-    };
 
     return (
         <AnimatePresence>
@@ -174,22 +137,27 @@ export const GlobalLoading = () => {
                         '--text': colors.text,
                         '--accent': colors.accent,
                         '--gold': colors.gold,
-                        '--silver': colors.silver
+                        '--silver': colors.silver,
+                        '--neon': colors.neon,
+                        '--gradient1': colors.gradient1,
+                        '--gradient2': colors.gradient2,
+                        '--gradient3': colors.gradient3
                     }}
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
                     exit="exit"
                 >
-                    {/* Animated background elements */}
+                    {/* Enhanced background with gradient orbs */}
                     <div className={styles.backgroundElements}>
-                        <div className={styles.floatingOrb1} />
-                        <div className={styles.floatingOrb2} />
-                        <div className={styles.floatingOrb3} />
+                        <div className={styles.gradientOrb1} />
+                        <div className={styles.gradientOrb2} />
+                        <div className={styles.gradientOrb3} />
+                        <div className={styles.particleField} />
                     </div>
 
                     <div className={styles.loadingContainer}>
-                        {/* Animated Logo */}
+                        {/* Enhanced Logo with 3D effect */}
                         <motion.div
                             className={styles.logoContainer}
                             variants={logoVariants}
@@ -201,82 +169,118 @@ export const GlobalLoading = () => {
                                 alt="Logo" 
                                 className={styles.logo}
                             />
-                            {/* Logo glow effect */}
-                            <div className={styles.logoGlow} />
+                            {/* Multiple glow effects */}
+                            <div className={styles.logoGlow1} />
+                            <div className={styles.logoGlow2} />
+                            <div className={styles.logoPulse} />
                         </motion.div>
                         
-                        {/* Animated Text Display */}
-                        <div className={styles.textDisplay}>
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={currentTextIndex}
-                                    className={`${styles.textContainer} ${getTextStyle(loadingTexts[currentTextIndex].type)}`}
-                                    variants={textVariants}
-                                    initial="enter"
-                                    animate="center"
-                                    exit="exit"
-                                >
-                                    {loadingTexts[currentTextIndex].type === 'partnership' && (
-                                        <div className={styles.partnershipContent}>
-                                            <span className={styles.prefix}>{loadingTexts[currentTextIndex].text}</span>
-                                            <motion.span 
-                                                className={styles.companyName}
-                                                variants={companyVariants}
-                                                initial="initial"
-                                                animate="animate"
-                                            >
-                                                {loadingTexts[currentTextIndex].company}
-                                            </motion.span>
-                                            <div className={styles.partnershipBadge}>PARTNERSHIP</div>
-                                        </div>
-                                    )}
-                                    
-                                    {loadingTexts[currentTextIndex].type === 'powered' && (
-                                        <div className={styles.poweredContent}>
-                                            <span className={styles.prefix}>{loadingTexts[currentTextIndex].text}</span>
-                                            <motion.span 
-                                                className={styles.techName}
-                                                animate={{
-                                                    textShadow: [
-                                                        '0 0 10px var(--silver)',
-                                                        '0 0 20px var(--silver)',
-                                                        '0 0 10px var(--silver)'
-                                                    ]
-                                                }}
-                                                transition={{
-                                                    duration: 2,
-                                                    repeat: Infinity
-                                                }}
-                                            >
-                                                {loadingTexts[currentTextIndex].company}
-                                            </motion.span>
-                                        </div>
-                                    )}
-                                    
-                                    {loadingTexts[currentTextIndex].type === 'journey' && (
-                                        <div className={styles.journeyContent}>
-                                            <span className={styles.journeyText}>{loadingTexts[currentTextIndex].text}</span>
-                                            <motion.span 
-                                                className={styles.highlightText}
-                                                animate={{
-                                                    backgroundPosition: ['0%', '100%', '0%'],
-                                                    scale: [1, 1.05, 1]
-                                                }}
-                                                transition={{
-                                                    duration: 3,
-                                                    repeat: Infinity,
-                                                    ease: "easeInOut"
-                                                }}
-                                            >
-                                                {loadingTexts[currentTextIndex].highlight}
-                                            </motion.span>
-                                        </div>
-                                    )}
-                                </motion.div>
-                            </AnimatePresence>
-                        </div>
+                        {/* All Texts Displayed At Once */}
+                        <motion.div 
+                            className={styles.textsContainer}
+                            variants={textContainerVariants}
+                            initial="hidden"
+                            animate="visible"
+                        >
+                            {/* Partnership Section */}
+                            <motion.div 
+                                className={styles.textSection}
+                                variants={textItemVariants}
+                            >
+                                <div className={styles.partnershipContent}>
+                                    <span className={styles.prefix}>{loadingContent.partnership.text}</span>
+                                    <motion.span 
+                                        className={styles.companyName}
+                                        animate={{
+                                            scale: [1, 1.05, 1],
+                                            textShadow: [
+                                                '0 0 20px var(--gold)',
+                                                '0 0 40px var(--gold)',
+                                                '0 0 20px var(--gold)'
+                                            ]
+                                        }}
+                                        transition={{
+                                            duration: 3,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                    >
+                                        {loadingContent.partnership.company}
+                                    </motion.span>
+                                    <motion.div 
+                                        className={styles.partnershipBadge}
+                                        animate={{
+                                            boxShadow: [
+                                                '0 0 10px var(--gold)',
+                                                '0 0 20px var(--gold)',
+                                                '0 0 10px var(--gold)'
+                                            ]
+                                        }}
+                                        transition={{
+                                            duration: 2,
+                                            repeat: Infinity
+                                        }}
+                                    >
+                                        PREMIUM PARTNER
+                                    </motion.div>
+                                </div>
+                            </motion.div>
+
+                            {/* Powered By Section */}
+                            <motion.div 
+                                className={styles.textSection}
+                                variants={textItemVariants}
+                            >
+                                <div className={styles.poweredContent}>
+                                    <span className={styles.prefix}>{loadingContent.powered.text}</span>
+                                    <motion.span 
+                                        className={styles.techName}
+                                        animate={{
+                                            backgroundPosition: ['0%', '100%', '0%'],
+                                            filter: [
+                                                'brightness(1)',
+                                                'brightness(1.3)',
+                                                'brightness(1)'
+                                            ]
+                                        }}
+                                        transition={{
+                                            duration: 4,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                    >
+                                        {loadingContent.powered.company}
+                                    </motion.span>
+                                </div>
+                            </motion.div>
+
+                            {/* Journey Section */}
+                            <motion.div 
+                                className={styles.textSection}
+                                variants={textItemVariants}
+                            >
+                                <div className={styles.journeyContent}>
+                                    <span className={styles.journeyText}>{loadingContent.journey.text}</span>
+                                    <motion.span 
+                                        className={styles.highlightText}
+                                        animate={{
+                                            backgroundPosition: ['0%', '100%', '0%'],
+                                            scale: [1, 1.08, 1],
+                                            rotate: [0, 1, -1, 0]
+                                        }}
+                                        transition={{
+                                            duration: 4,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                    >
+                                        {loadingContent.journey.highlight}
+                                    </motion.span>
+                                </div>
+                            </motion.div>
+                        </motion.div>
                         
-                        {/* Progress Bar */}
+                        {/* Enhanced Progress Bar */}
                         <div className={styles.progressContainer}>
                             <div className={styles.progressBar}>
                                 <motion.div 
@@ -291,25 +295,28 @@ export const GlobalLoading = () => {
                                     }}
                                 >
                                     <div className={styles.progressTip} />
-                                    {/* Progress particles */}
+                                    {/* Enhanced particles */}
                                     <div className={styles.progressParticles}>
-                                        {[...Array(3)].map((_, i) => (
+                                        {[...Array(5)].map((_, i) => (
                                             <motion.div
                                                 key={i}
                                                 className={styles.particle}
                                                 animate={{
-                                                    y: [0, -10, 0],
-                                                    opacity: [0, 1, 0]
+                                                    y: [0, -15, 0],
+                                                    opacity: [0, 1, 0],
+                                                    scale: [0.8, 1.2, 0.8]
                                                 }}
                                                 transition={{
-                                                    duration: 1.5,
+                                                    duration: 2,
                                                     repeat: Infinity,
-                                                    delay: i * 0.3,
+                                                    delay: i * 0.4,
                                                     ease: "easeOut"
                                                 }}
                                             />
                                         ))}
                                     </div>
+                                    {/* Shimmer overlay */}
+                                    <div className={styles.progressShimmer} />
                                 </motion.div>
                             </div>
                             <motion.div 
@@ -326,10 +333,10 @@ export const GlobalLoading = () => {
                                     className={styles.percentSign}
                                     animate={{ 
                                         opacity: [0.6, 1, 0.6],
-                                        scale: [1, 1.1, 1]
+                                        scale: [1, 1.2, 1]
                                     }}
                                     transition={{ 
-                                        duration: 2, 
+                                        duration: 1.5, 
                                         repeat: Infinity,
                                         ease: 'easeInOut'
                                     }}
@@ -339,7 +346,7 @@ export const GlobalLoading = () => {
                             </motion.div>
                         </div>
 
-                        {/* Loading Text with Animation */}
+                        {/* Enhanced Loading Text */}
                         <motion.div 
                             className={styles.loadingText}
                             initial={{ opacity: 0, y: 10 }}
