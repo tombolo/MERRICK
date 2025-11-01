@@ -4,7 +4,6 @@ import DBotStore from '../scratch/dbot-store';
 import { save_types } from '../constants/save-type';
 
 // Import lecture bots
-import Auto102ByLegacyHub from './lecture/AUTO102BYLEGACYHUB!!.xml';
 import Auto102ByLectureAdvice from './lecture/AUTO1O2BYLECTUREADVICE.xml';
 import EvenOddTraderBot from './lecture/EVEN-ODDTRADERBOT.xml';
 import EvenEvenOddOddBot from './lecture/EVENEVEN_ODDODDBot.xml';
@@ -24,13 +23,6 @@ const getBlockly = () => {
 
 // Static bot configurations - Lecture Bots Only
 const STATIC_BOTS = {
-    auto_102_legacy_hub: {
-        id: 'auto_102_legacy_hub',
-        name: 'AUTO 102 BY LEGACY HUB',
-        xml: Auto102ByLegacyHub,
-        timestamp: Date.now(),
-        save_type: save_types.LOCAL,
-    },
     auto_102_lecture_advice: {
         id: 'auto_102_lecture_advice',
         name: 'AUTO 102 BY LECTURE ADVICE',
