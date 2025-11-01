@@ -2,29 +2,16 @@ import LZString from 'lz-string';
 import localForage from 'localforage';
 import DBotStore from '../scratch/dbot-store';
 import { save_types } from '../constants/save-type';
-import AutoRobot from './bots/BRAMEVENODDPRINTER.xml';
-import OverUnderBot from './bots/Derivwizard.xml';
-import Derivminer from './bots/$hmspeedbot$.xml';
-import Derivflipper from './bots/Mrdukeov2bot.xml';
-import Printer from './bots/BRAMSPEEDBOT.xml';
-import Under8 from './bots/DoubleOverWithanalysis.xml';
-import Dodo from './bots/Aiunder8-7-6-5recoveryunder3-4-5adjustable.xml';
-import Pepe from './bots/PROFITGAINERXVTscunentrypointbeforrun.xml';
-import Kuku from './bots/PROFITGAINERXVT.xml';
-import Marketkiller from './bots/Marketkiller.xml';
-import V6strikerbot from './bots/V6strikerbot.xml';
-import CandlemineVersion2 from './bots/CandlemineVersion2.xml';
-import EVENODDTRADERBOT from './bots/EVEN-ODDTRADERBOT.xml';
-import ExpertSpeedBotByCHOSENDOLLARPRINTERFx from './bots/ExpertSpeedBotByCHOSENDOLLARPRINTERFx.xml';
-import AUTOC4VOLTAIPREMIUMROBOT from './bots/AUTOC4VOLTAIPREMIUMROBOT.xml';
-import MASTERBOTV6UPGRADEDDBot from './bots/MASTERBOTV6UPGRADEDDBot.xml';
-import AlgoSniper from './bots/AlgoSniper.xml';
-import ExpertSpeedBot from './bots/ExpertSpeedBot.xml';
-import SignalSniperAutoBot from './bots/SignalSniperAutoBot.xml';
-import OVERDESTROYERBYMIKEG from './bots/OVERDESTROYERBYMIKEG.xml';
-import Legacyv1speedbot from './bots/legacyv1speedbot.xml'
-import OVERDESTROYERBYLEGACY from './bots/OVERDESTROYERBYLEGACY.xml'
-import Thelecturespeedbotv1 from './bots/Thelecturespeedbotv1.xml'
+
+// Import lecture bots
+import Auto102ByLegacyHub from './lecture/AUTO102BYLEGACYHUB!!.xml';
+import Auto102ByLectureAdvice from './lecture/AUTO1O2BYLECTUREADVICE.xml';
+import EvenOddTraderBot from './lecture/EVEN-ODDTRADERBOT.xml';
+import EvenEvenOddOddBot from './lecture/EVENEVEN_ODDODDBot.xml';
+import OddOddEvenEvenBot from './lecture/ODDODDEVENEVENBOT.xml';
+import OverDestroyerByMikeG from './lecture/OVERDESTROYERBYMIKEG.xml';
+import TheLectureSpeedbotV1 from './lecture/Thelecturespeedbotv1.xml';
+import StakeList101 from './lecture/stakelist_101.xml';
 
 
 // Ensure Blockly is available globally
@@ -35,33 +22,61 @@ const getBlockly = () => {
     throw new Error('Blockly not available - workspace not initialized');
 };
 
-// Static bot configurations
+// Static bot configurations - Lecture Bots Only
 const STATIC_BOTS = {
+    auto_102_legacy_hub: {
+        id: 'auto_102_legacy_hub',
+        name: 'AUTO 102 BY LEGACY HUB',
+        xml: Auto102ByLegacyHub,
+        timestamp: Date.now(),
+        save_type: save_types.LOCAL,
+    },
+    auto_102_lecture_advice: {
+        id: 'auto_102_lecture_advice',
+        name: 'AUTO 102 BY LECTURE ADVICE',
+        xml: Auto102ByLectureAdvice,
+        timestamp: Date.now(),
+        save_type: save_types.LOCAL,
+    },
+    even_odd_trader: {
+        id: 'even_odd_trader',
+        name: 'EVEN ODD TRADER BOT',
+        xml: EvenOddTraderBot,
+        timestamp: Date.now(),
+        save_type: save_types.LOCAL,
+    },
+    even_even_odd_odd: {
+        id: 'even_even_odd_odd',
+        name: 'EVEN EVEN ODD ODD BOT',
+        xml: EvenEvenOddOddBot,
+        timestamp: Date.now(),
+        save_type: save_types.LOCAL,
+    },
+    odd_odd_even_even: {
+        id: 'odd_odd_even_even',
+        name: 'ODD ODD EVEN EVEN BOT',
+        xml: OddOddEvenEvenBot,
+        timestamp: Date.now(),
+        save_type: save_types.LOCAL,
+    },
     over_destroyer_mikeg: {
         id: 'over_destroyer_mikeg',
         name: 'OVER DESTROYER BY MIKE G',
-        xml: OVERDESTROYERBYMIKEG,
-        timestamp: Date.now(),
-        save_type: save_types.LOCAL,
-    },
-    legacy_v1_speedbot: {
-        id: 'legacy_v1_speedbot',
-        name: 'Legacy V1 Speedbot',
-        xml: Legacyv1speedbot,
-        timestamp: Date.now(),
-        save_type: save_types.LOCAL,
-    },
-    over_destroyer_legacy: {
-        id: 'over_destroyer_legacy',
-        name: 'OVER DESTROYER BY LEGACY',
-        xml: OVERDESTROYERBYLEGACY,
+        xml: OverDestroyerByMikeG,
         timestamp: Date.now(),
         save_type: save_types.LOCAL,
     },
     the_lecture_speedbot: {
         id: 'the_lecture_speedbot',
         name: 'The Lecture Speedbot V1',
-        xml: Thelecturespeedbotv1,
+        xml: TheLectureSpeedbotV1,
+        timestamp: Date.now(),
+        save_type: save_types.LOCAL,
+    },
+    stake_list_101: {
+        id: 'stake_list_101',
+        name: 'Stake List 101',
+        xml: StakeList101,
         timestamp: Date.now(),
         save_type: save_types.LOCAL,
     }
@@ -98,17 +113,7 @@ export const getSavedWorkspaces = async () => {
 export const loadStrategy = async strategy_id => {
     console.log(`[DEBUG] Attempting to load bot: ${strategy_id}`);
 
-    // Check for duplicate IDs
     const staticBots = getStaticBots();
-    const duplicateIds = staticBots.filter((bot, index) => staticBots.findIndex(b => b.id === bot.id) !== index);
-
-    if (duplicateIds.length > 0) {
-        console.error(
-            '[ERROR] Duplicate bot IDs found:',
-            duplicateIds.map(b => b.id)
-        );
-    }
-
     const strategy = staticBots.find(bot => bot.id === strategy_id);
 
     if (!strategy) {
@@ -129,12 +134,14 @@ export const loadStrategy = async strategy_id => {
             return false;
         }
 
-        // Clear existing workspace first
-        console.log('[DEBUG] Clearing existing workspace');
-        Blockly.derivWorkspace.clear();
+        // Completely reset the workspace first
+        console.log(`[DEBUG] Resetting workspace before loading bot: ${strategy_id}`);
+        resetWorkspace(Blockly);
 
+        // Parse the XML content
         const parser = new DOMParser();
-        const xmlDom = parser.parseFromString(strategy.xml, 'text/xml').documentElement;
+        const xmlString = typeof strategy.xml === 'string' ? strategy.xml : strategy.xml.default || '';
+        const xmlDom = parser.parseFromString(xmlString, 'text/xml').documentElement;
 
         // Check if XML is valid
         if (xmlDom.querySelector('parsererror')) {
@@ -144,11 +151,33 @@ export const loadStrategy = async strategy_id => {
 
         const convertedXml = convertStrategyToIsDbot(xmlDom);
 
-        Blockly.Xml.domToWorkspace(convertedXml, Blockly.derivWorkspace);
-        Blockly.derivWorkspace.current_strategy_id = strategy_id;
-
-        console.log(`[SUCCESS] Loaded static bot: ${strategy.name} (ID: ${strategy_id})`);
-        return true;
+        // Disable events during load to prevent interference
+        Blockly.Events.disable();
+        
+        try {
+            // Clear any existing blocks (double-check)
+            Blockly.derivWorkspace.clear();
+            
+            // Load the new blocks
+            Blockly.Xml.domToWorkspace(convertedXml, Blockly.derivWorkspace);
+            
+            // Store the current strategy ID
+            Blockly.derivWorkspace.current_strategy_id = strategy_id;
+            
+            // Force a re-render
+            setTimeout(() => {
+                if (Blockly.derivWorkspace.svgResize) {
+                    Blockly.derivWorkspace.svgResize();
+                }
+                Blockly.derivWorkspace.render();
+            }, 100);
+            
+            console.log(`[SUCCESS] Loaded static bot: ${strategy.name} (ID: ${strategy_id})`);
+            return true;
+        } finally {
+            // Always re-enable events
+            Blockly.Events.enable();
+        }
     } catch (error) {
         console.error('Error loading static bot:', error);
         return false;
